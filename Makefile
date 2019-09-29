@@ -3,13 +3,15 @@
 CC = g++
 CFLAGS = -Wall -Wextra -Werror
 CPPFLAGS = -Iinclude
-LDFLAGS = -L~/bin
+LDFLAGS = -L~/bin 
 
 all: main
 
 main: src/main.cpp
 	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -c src/main.cpp -o bin/main.o
-	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) bin/main.o -o bin/main
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -c src/sha256.cpp -o bin/sha256.o
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) -c src/block.cpp -o bin/block.o
+	$(CC) $(CFLAGS) $(CPPFLAGS) $(LDFLAGS) bin/main.o bin/sha256.o bin/block.o -o bin/main
 
 run: bin/main
 	./bin/main
