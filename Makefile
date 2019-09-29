@@ -14,5 +14,12 @@ main: src/main.cpp
 run: bin/main
 	./bin/main
 
+git %:
+	git add .
+	git commit -m "$(@:git %=%)"
+#	git config credential.helper store
+#	git config --global credential.helper 'cache --timeout 3600'
+	git push
+
 clean:
 	rm -f bin/main bin/*.o bin/*.so core
